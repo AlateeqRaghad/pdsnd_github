@@ -2,12 +2,12 @@ import time
 import pandas as pd
 
 
-CITY_DATA = { 'Chicago': 'chicago.csv',
+cityData = { 'Chicago': 'chicago.csv',
               'New York': 'new_york_city.csv',
               'Washington': 'washington.csv' }
-Valid_days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday' , 'All']
+validDays=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday' , 'All']
 
-Valid_months=['January','February','March','April','May','June', 'All']
+validMonths=['January','February','March','April','May','June', 'All']
 
 def get_filters():
     """
@@ -31,7 +31,7 @@ def get_filters():
         # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
         day=input(print('Which day ? (e.g. Sunday)  or All if no specific day ?')).title()
 
-        if (day not in Valid_days and month not in Valid_months and city not in CITY_DATA):
+        if (day not in validDays and month not in validMonths and city not in cityData):
             print('Please enter valid city , month , and day')
             continue
 
@@ -59,7 +59,7 @@ def load_data(city, month, day):
 
     # load data file into a dataframe
 
-    df = pd.read_csv(CITY_DATA[city])
+    df = pd.read_csv(cityData[city])
 
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
@@ -89,7 +89,7 @@ def time_stats(df, month , day):
     """Displays statistics on the most frequent times of travel."""
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
-    start_time = time.time()
+    startTime = time.time()
 
     # If no month and day filter
     if (day=='All' and month =='All') :
@@ -108,7 +108,7 @@ def time_stats(df, month , day):
         print('Most common Hour: {}'.format(df['hour'].mode()[0]))
 
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\nThis took %s seconds." % (time.time() - startTime))
     print('-'*40)
 
 
@@ -116,7 +116,7 @@ def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
 
     print('\nCalculating The Most Popular Stations and Trip...\n')
-    start_time = time.time()
+    startTime = time.time()
 
     # TO DO: display most commonly used start station
     print('Most popular start station is: {} , with count {}\n'.format( df['Start Station'].mode()[0], df['Start Station'].value_counts().max() ))
@@ -129,7 +129,7 @@ def station_stats(df):
     print('Most popular trip is: {} , with count {}\n'.format((df['Start Station'] +' - '+ df['End Station']).mode()[0],
                                                             (df['Start Station'] +' - '+ df['End Station']).value_counts().max() ) )
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\nThis took %s seconds." % (time.time() - startTime))
     print('-'*40)
 
 
@@ -137,7 +137,7 @@ def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
     print('\nCalculating Trip Duration...\n')
-    start_time = time.time()
+    startTime = time.time()
 
     #Calculate total trips
     Total_trips= len(df)
@@ -154,7 +154,7 @@ def trip_duration_stats(df):
     Avg= Total_duration/Total_trips
     print('Total trips : {},\nTotal duration : {} minutes ,\nAverage duration : {} minutes'.format(Total_trips,Total_duration,Avg))
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\nThis took %s seconds." % (time.time() - startTime))
     print('-'*40)
 
 
@@ -162,7 +162,7 @@ def user_stats(df,city):
     """Displays statistics on bikeshare users."""
 
     print('\nCalculating User Stats...\n')
-    start_time = time.time()
+    startTime = time.time()
 
     # TO DO: Display counts of user types
     print('User types:\n{}\n'.format(df['User Type'].value_counts()))
@@ -179,7 +179,7 @@ def user_stats(df,city):
     else :
         print('No Gender and birth year data to share')
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\nThis took %s seconds." % (time.time() - startTime))
     print('-'*40)
 
 
@@ -194,10 +194,10 @@ def main():
         user_stats(df,city)
 
         counter = 0
-        indivisual_trip_data = input('\nWould you like to see indivisual trip data? Enter yes or no.\n')
-        while (indivisual_trip_data.lower() == 'yes'):
+        indivisualTripData = input('\nWould you like to see indivisual trip data? Enter yes or no.\n')
+        while (indivisualTripData.lower() == 'yes'):
             print(df[counter:counter + 5])
-            indivisual_trip_data = input('\nWould you like to see indivisual trip data? Enter yes or no.\n')
+            indivisualTripData = input('\nWould you like to see indivisual trip data? Enter yes or no.\n')
             counter +=5
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
