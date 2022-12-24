@@ -174,7 +174,7 @@ def user_stats(df,city):
         print('Gender:\n{}\n'.format(df['Gender'].value_counts()))
 
         # TO DO: Display earliest, most recent, and most common year of birth
-        print('Users birth year:\nEarlist birth year is: {}\nMost resent birth year is: {}\nMost common birth year is: {}\n'
+        print('Users birth year: \nEarlist birth year is: {}\nMost resent birth year is: {}\nMost common birth year is: {}\n'
               .format(df['Birth Year'].min(),df['Birth Year'].max(),df['Birth Year'].mode()[0]))
     else :
         print('No Gender and birth year data to share')
