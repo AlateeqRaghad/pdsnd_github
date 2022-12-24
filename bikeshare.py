@@ -1,7 +1,7 @@
 import time
 import pandas as pd
 
-
+#Array to help data loading
 CITY_DATA = { 'Chicago': 'chicago.csv',
               'New York': 'new_york_city.csv',
               'Washington': 'washington.csv' }
